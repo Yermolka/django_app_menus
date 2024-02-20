@@ -1,7 +1,13 @@
 {% load menus_extras %}
 
 {% for item in results %}
-    <div><a href={{item.item_relative_url}}>{{item.item_name}}</a>
+    <div>
+        {% if item.item_relative_url.0 == '/' %}
+        <a href={{item.item_relative_url}}>{{item.item_name}}</a>
+        {% else %}
+        <a href={% url item.item_relative_url %}>{{item.item_name}}</a>
+        {% endif %}
+
         {% get_children item.item_name others as children %}
         {% if children.0 %}
         {% if item in open_items %}
