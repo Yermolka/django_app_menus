@@ -1,0 +1,17 @@
+{% load menus_extras %}
+
+{% for item in results %}
+    <div><a href={{item.item_relative_url}}>{{item.item_name}}</a>
+        {% get_children item.item_name others as children %}
+        {% if children.0 %}
+        {% if item in open_items %}
+        <details open>
+        {% else %}
+        <details>
+        {% endif %}
+        <summary></summary>
+            {% draw_menu_items item.item_name others %}
+        {% endif %}
+    </div>
+{% endfor %}
+
